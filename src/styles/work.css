@@ -1,0 +1,116 @@
+.work-3d-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 5% 60px;
+  }
+
+  .work-3d-container {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .work-3d-item {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(79, 195, 247, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .work-3d-item:hover {
+    border-color: rgba(79, 195, 247, 0.3);
+    box-shadow: 0 20px 60px rgba(79, 195, 247, 0.1);
+  }
+
+  /* RUBIK'S CUBE */
+  .cube-scene {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cube-canvas {
+    height: 350px;
+  }
+
+
+  .cube-controls {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(0, 0, 17, 0.8);
+    border-top: 1px solid rgba(79, 195, 247, 0.1);
+  }
+
+  .cube-btn-row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .cube-btn {
+    width: 42px;
+    height: 34px;
+    background: rgba(79, 195, 247, 0.08);
+    border: 1px solid rgba(79, 195, 247, 0.2);
+    border-radius: 8px;
+    color: var(--star-blue);
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    cursor: none;
+    transition: all 0.2s ease;
+  }
+
+  .cube-btn:hover {
+    background: rgba(79, 195, 247, 0.2);
+    border-color: var(--star-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.2);
+  }
+
+  .cube-btn:active {
+    transform: translateY(0);
+    background: rgba(79, 195, 247, 0.3);
+  }
+
+  .cube-btn-special {
+    padding: 8px 20px;
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.15), rgba(224, 64, 251, 0.15));
+    border: 1px solid rgba(224, 64, 251, 0.3);
+    border-radius: 8px;
+    color: var(--nebula-pink);
+    font-family: var(--font-heading);
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    cursor: none;
+    transition: all 0.2s ease;
+  }
+
+  .cube-btn-special:hover {
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.25), rgba(224, 64, 251, 0.25));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(224, 64, 251, 0.2);
+  }
+
+  /* MACBOOK */
+  .macbook-scene {
+    height: 500px;
+  }
+
+  .work-3d-item {
+    flex: 1;
+    height: 550px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(79, 195, 247, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+

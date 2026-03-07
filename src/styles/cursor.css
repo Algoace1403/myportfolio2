@@ -1,0 +1,31 @@
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--star-blue);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+    mix-blend-mode: difference;
+  }
+
+  .cursor-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--nebula-pink);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .custom-cursor.hover {
+    transform: scale(2.5);
+    background-color: rgba(79, 195, 247, 0.15);
+    border-color: var(--nebula-pink);
+  }

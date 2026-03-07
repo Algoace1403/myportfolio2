@@ -1,0 +1,227 @@
+.timeline-page {
+    min-height: 100vh;
+    padding: 120px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .timeline-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .timeline-subtitle {
+    color: var(--gray);
+    font-size: 1rem;
+    margin-top: 15px;
+  }
+
+  .timeline-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* THE GLOWING CENTER LINE */
+  .timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--star-blue), var(--nebula-pink), var(--star-blue));
+    transform: translateX(-50%);
+    opacity: 0.3;
+  }
+
+  .timeline-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -4px;
+    width: 10px;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(79, 195, 247, 0.2), rgba(224, 64, 251, 0.2), rgba(79, 195, 247, 0.2));
+    filter: blur(8px);
+  }
+
+  /* ROCKET */
+  .timeline-rocket {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    z-index: 10;
+    filter: drop-shadow(0 0 10px rgba(79, 195, 247, 0.5));
+    transition: top 0.1s linear;
+    pointer-events: none;
+  }
+
+  /* TIMELINE ITEMS */
+  .timeline-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 80px;
+    position: relative;
+  }
+
+  .timeline-item:nth-child(odd) {
+    flex-direction: row;
+  }
+
+  .timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-card {
+    margin-right: 60px;
+    text-align: right;
+  }
+
+  .timeline-item:nth-child(even) .timeline-card {
+    margin-left: 60px;
+    text-align: left;
+  }
+
+  /* GLOWING NODE */
+  .timeline-node {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--star-blue), var(--nebula-pink));
+    z-index: 2;
+    box-shadow: 0 0 20px rgba(79, 195, 247, 0.5), 0 0 40px rgba(224, 64, 251, 0.3);
+    animation: node-pulse 2s ease-in-out infinite;
+  }
+
+  .timeline-node .node-ring {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(79, 195, 247, 0.3);
+    border-radius: 50%;
+    animation: ring-expand 2s ease-in-out infinite;
+  }
+
+  @keyframes node-pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.2); }
+  }
+
+  @keyframes ring-expand {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+
+  /* TIMELINE CARD */
+  .timeline-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(79, 195, 247, 0.1);
+    border-radius: 16px;
+    padding: 25px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .timeline-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.05), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .timeline-card:hover::before {
+    left: 100%;
+  }
+
+  .timeline-card:hover {
+    border-color: var(--star-blue);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(79, 195, 247, 0.15);
+  }
+
+  .timeline-year {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    color: var(--nebula-pink);
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .timeline-title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .timeline-desc {
+    color: var(--gray);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .timeline-icon {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  /* SHOOTING STARS */
+  .shooting-star {
+    position: fixed;
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, rgba(79, 195, 247, 0.8), transparent);
+    animation: shoot 3s linear infinite;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .shooting-star:nth-child(1) { top: 15%; left: -80px; animation-delay: 0s; }
+  .shooting-star:nth-child(2) { top: 35%; left: -80px; animation-delay: 1.5s; }
+  .shooting-star:nth-child(3) { top: 65%; left: -80px; animation-delay: 3s; }
+
+  @keyframes shoot {
+    0% { transform: translateX(0) rotate(-15deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateX(100vw) rotate(-15deg); opacity: 0; }
+  }
+
+
+    /* ROCKET TRAIL */
+    .rocket-trail {
+        position: absolute;
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 3px;
+        height: 50px;
+        background: linear-gradient(to top, transparent, var(--star-blue), var(--nebula-pink));
+        filter: blur(2px);
+        opacity: 0.7;
+      }
+    
+      .timeline-rocket {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.8rem;
+        z-index: 10;
+        filter: drop-shadow(0 0 15px rgba(79, 195, 247, 0.6));
+        pointer-events: none;
+        transition: top 0.3s ease-out;
+      }
+    

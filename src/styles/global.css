@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --bg-primary: #000011;
+    --star-blue: #4fc3f7;
+    --nebula-pink: #e040fb;
+    --white: #ffffff;
+    --gray: #8892b0;
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--star-blue);
+    border-radius: 3px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  section {
+    min-height: 100vh;
+    position: relative;
+    padding: 100px 5%;
+  }
+
+
+  /* What you're learning here:
+  - @import — loads Google Fonts
+  - :root — CSS variables (reusable colors)
+  - * — universal reset (removes browser defaults)
+  - cursor: none — we'll replace it with our custom glowing cursor
+  - overflow-x: hidden — prevents horizontal scroll from 3D elements */
+
+
+    /* FILM GRAIN OVERLAY */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'
+    stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+  

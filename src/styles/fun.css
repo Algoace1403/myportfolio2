@@ -1,0 +1,294 @@
+.fun-page {
+    min-height: 100vh;
+    padding: 120px 5% 60px;
+    position: relative;
+  }
+
+  .fun-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .fun-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  /* SHARED GAME CARD */
+  .game-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(79, 195, 247, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .game-card:hover {
+    border-color: rgba(79, 195, 247, 0.3);
+    box-shadow: 0 15px 40px rgba(79, 195, 247, 0.1);
+  }
+
+  .game-card-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(79, 195, 247, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .game-card-header h3 {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--white);
+    letter-spacing: 2px;
+  }
+
+  .game-card-body {
+    padding: 20px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* TERMINAL */
+  .terminal {
+    background: #0d1117;
+    border-radius: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    overflow: hidden;
+  }
+
+  .terminal-bar {
+    display: flex;
+    gap: 6px;
+    padding: 10px 12px;
+    background: #161b22;
+  }
+
+  .terminal-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+
+  .terminal-body {
+    padding: 12px;
+    flex: 1;
+    overflow-y: auto;
+    max-height: 200px;
+  }
+
+  .terminal-line {
+    margin-bottom: 5px;
+    line-height: 1.5;
+  }
+
+  .terminal-prompt {
+    color: var(--star-blue);
+  }
+
+  .terminal-response {
+    color: #8b949e;
+  }
+
+  .terminal-input-row {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-top: 1px solid #21262d;
+  }
+
+  .terminal-input-row span {
+    color: var(--star-blue);
+    margin-right: 8px;
+  }
+
+  .terminal-input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--white);
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    flex: 1;
+    caret-color: var(--star-blue);
+  }
+
+  /* REACTION GAME */
+  .reaction-area {
+    flex: 1;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: none;
+    transition: background 0.2s ease;
+    min-height: 200px;
+  }
+
+  .reaction-waiting {
+    background: rgba(224, 64, 251, 0.1);
+    border: 1px solid rgba(224, 64, 251, 0.2);
+  }
+
+  .reaction-ready {
+    background: rgba(79, 195, 247, 0.15);
+    border: 1px solid rgba(79, 195, 247, 0.3);
+  }
+
+  .reaction-go {
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    animation: go-pulse 0.3s ease;
+  }
+
+  .reaction-result {
+    background: rgba(79, 195, 247, 0.1);
+    border: 1px solid rgba(79, 195, 247, 0.2);
+  }
+
+  @keyframes go-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+  }
+
+  .reaction-text {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
+
+  .reaction-time {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--star-blue);
+    font-family: var(--font-heading);
+  }
+
+  .reaction-ms {
+    font-size: 0.8rem;
+    color: var(--gray);
+  }
+
+  /* GRAVITY BALLS */
+  .gravity-canvas {
+    flex: 1;
+    min-height: 200px;
+    border-radius: 12px;
+    background: rgba(0, 0, 17, 0.5);
+    border: 1px solid rgba(79, 195, 247, 0.1);
+    cursor: none;
+  }
+
+  .gravity-hint {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.7rem;
+    color: var(--gray);
+    letter-spacing: 2px;
+  }
+
+  /* CLICK COUNTER */
+  .click-counter-area {
+    flex: 1;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(224, 64, 251, 0.05);
+    border: 1px solid rgba(224, 64, 251, 0.1);
+    cursor: none;
+    min-height: 200px;
+    gap: 15px;
+    transition: all 0.1s ease;
+  }
+
+  .click-counter-area:active {
+    background: rgba(224, 64, 251, 0.15);
+    transform: scale(0.98);
+  }
+
+  .click-count {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--star-blue), var(--nebula-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .click-label {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    color: var(--gray);
+    letter-spacing: 3px;
+  }
+
+  .click-cps {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    color: var(--star-blue);
+    letter-spacing: 2px;
+  }
+
+  .reset-btn {
+    padding: 6px 16px;
+    background: rgba(79, 195, 247, 0.1);
+    border: 1px solid rgba(79, 195, 247, 0.2);
+    border-radius: 20px;
+    color: var(--star-blue);
+    font-family: var(--font-heading);
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    cursor: none;
+    transition: all 0.2s ease;
+  }
+
+  .reset-btn:hover {
+    background: rgba(79, 195, 247, 0.2);
+  }
+
+
+   /* TERMINAL COMMAND HINTS */
+   .terminal-hints {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 8px 12px;
+    border-top: 1px solid #21262d;
+    background: rgba(22, 27, 34, 0.5);
+  }
+
+  .hint-btn {
+    padding: 3px 10px;
+    background: rgba(79, 195, 247, 0.08);
+    border: 1px solid rgba(79, 195, 247, 0.15);
+    border-radius: 12px;
+    color: var(--star-blue);
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    cursor: none;
+    transition: all 0.2s ease;
+  }
+
+  .hint-btn:hover {
+    background: rgba(79, 195, 247, 0.2);
+    border-color: var(--star-blue);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(79, 195, 247, 0.15);
+  }
