@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Loader from './components/ui/Loader'
 import Navbar from './components/ui/Navbar'
 import CustomCursor from './components/ui/CustomCursor'
+import StarsBackground from './components/3d/Stars'
 import Home from './pages/Home'
 import Work from './pages/Work'
 import Timeline from './pages/Timeline'
@@ -43,6 +44,7 @@ function App() {
   return (
     <Router>
       <Loader />
+      <StarsBackground />
       <CustomCursor />
       <Navbar />
       <AnimatedRoutes />

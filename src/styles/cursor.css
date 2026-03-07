@@ -29,3 +29,11 @@
     background-color: rgba(79, 195, 247, 0.15);
     border-color: var(--nebula-pink);
   }
+
+  /* Hide custom cursor on touch/mobile devices */
+  @media (max-width: 768px), (pointer: coarse) {
+    .custom-cursor,
+    .cursor-dot {
+      display: none !important;
+    }
+  }

@@ -77,4 +77,32 @@
       background-repeat: repeat;
       background-size: 256px 256px;
     }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 768px) {
+    section {
+      padding: 80px 4%;
+    }
+
+    body {
+      cursor: auto;
+    }
+  }
+
+  @media (max-width: 480px) {
+    section {
+      padding: 70px 3%;
+    }
+  }
+
+  /* STARS BACKGROUND */
+  .stars-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
   

@@ -114,3 +114,64 @@
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
+  .work-3d-label {
+    text-align: center;
+    padding: 12px;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    color: var(--gray);
+    letter-spacing: 3px;
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 900px) {
+    .work-3d-container {
+      flex-direction: column;
+    }
+
+    .work-3d-item {
+      height: 450px;
+    }
+
+    .cube-scene {
+      height: 450px;
+    }
+
+    .macbook-scene {
+      height: 400px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .work-3d-section {
+      padding: 100px 3% 40px;
+    }
+
+    .work-3d-item {
+      height: 400px;
+    }
+
+    .cube-scene {
+      height: 400px;
+    }
+
+    .cube-canvas {
+      height: 280px;
+    }
+
+    .cube-btn {
+      width: 36px;
+      height: 30px;
+      font-size: 0.6rem;
+    }
+
+    .cube-btn-special {
+      padding: 6px 14px;
+      font-size: 0.55rem;
+    }
+
+    .macbook-scene {
+      height: 350px;
+    }
+  }
+

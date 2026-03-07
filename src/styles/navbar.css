@@ -1,3 +1,15 @@
+/* SCROLL PROGRESS BAR */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--star-blue), var(--nebula-pink), var(--star-blue));
+  z-index: 1001;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px var(--star-blue), 0 0 20px var(--nebula-pink);
+}
+
 .navbar {
     position: fixed;
     top: 0;
@@ -81,5 +93,86 @@
 
   .nav-links a.active::after {
     width: 100%;
+  }
+
+  /* HAMBURGER MENU */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: none;
+    z-index: 1001;
+  }
+
+  .ham-line {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--star-blue);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+
+  .hamburger.open .ham-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.open .ham-line:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  .hamburger.open .ham-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      max-width: 300px;
+      height: 100vh;
+      flex-direction: column;
+      background: rgba(0, 0, 17, 0.97);
+      backdrop-filter: blur(20px);
+      padding: 100px 40px 40px;
+      gap: 25px;
+      border-left: 1px solid rgba(79, 195, 247, 0.15);
+      transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-links.nav-open {
+      right: 0;
+    }
+
+    .nav-links a {
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+    }
+
+    .hero-name {
+      font-size: 2.5rem !important;
+    }
+
+    .hero-title {
+      font-size: 1rem !important;
+    }
+
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
   }
 

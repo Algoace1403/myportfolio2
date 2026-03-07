@@ -33,8 +33,8 @@ function Contact() {
             Whether you have a project in mind or just want to say hi,
             feel free to reach out!
           </p>
-          <a href="mailto:your@email.com" className="contact-email hover-target">
-            your@email.com
+          <a href="mailto:anuj.soni1403@gmail.com" className="contact-email hover-target">
+            anuj.soni1403@gmail.com
           </a>
 
           <div className="contact-socials">

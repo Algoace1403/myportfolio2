@@ -292,3 +292,54 @@
     transform: translateY(-1px);
     box-shadow: 0 3px 10px rgba(79, 195, 247, 0.15);
   }
+
+  .terminal-response {
+    white-space: pre-wrap;
+  }
+
+  @media (max-width: 768px) {
+    .fun-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .fun-page {
+      padding: 100px 3% 40px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .terminal {
+      font-size: 0.7rem;
+    }
+
+    .terminal-body {
+      max-height: 150px;
+      padding: 10px;
+    }
+
+    .hint-btn {
+      font-size: 0.55rem;
+      padding: 2px 8px;
+    }
+
+    .game-card-header h3 {
+      font-size: 0.7rem;
+    }
+
+    .game-card-body {
+      padding: 15px;
+      min-height: 200px;
+    }
+
+    .reaction-text {
+      font-size: 0.75rem;
+    }
+
+    .reaction-time {
+      font-size: 2rem;
+    }
+
+    .click-count {
+      font-size: 3rem;
+    }
+  }

@@ -107,3 +107,36 @@
     height: 100%;
     z-index: -1;
   }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 768px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .skills {
+      padding: 60px 5%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      max-width: 100%;
+    }
+
+    .skill-card {
+      padding: 25px 15px;
+      border-radius: 15px;
+    }
+
+    .skill-icon {
+      font-size: 2rem;
+    }
+
+    .skill-name {
+      font-size: 0.65rem;
+    }
+  }

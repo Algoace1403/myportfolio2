@@ -82,3 +82,54 @@
     margin-bottom: 25px;
     border-radius: 2px;
   }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 900px) {
+    .about-container {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .about-right {
+      height: 350px;
+      width: 100%;
+    }
+
+    .about-stats {
+      justify-content: center;
+    }
+
+    .about-line {
+      margin: 0 auto 25px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about {
+      padding: 60px 5%;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+    }
+
+    .about-text {
+      font-size: 0.9rem;
+    }
+
+    .about-stats {
+      gap: 25px;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+    }
+
+    .about-right {
+      height: 280px;
+    }
+  }

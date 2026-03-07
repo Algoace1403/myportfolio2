@@ -224,4 +224,87 @@
         pointer-events: none;
         transition: top 0.3s ease-out;
       }
-    
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 768px) {
+    .timeline-container {
+      max-width: 100%;
+    }
+
+    .timeline-line {
+      left: 20px;
+    }
+
+    .timeline-node {
+      left: 20px;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+      flex-direction: row;
+      padding-left: 50px;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-card,
+    .timeline-item:nth-child(even) .timeline-card {
+      margin: 0;
+      text-align: left;
+    }
+
+    .timeline-item > div:last-child {
+      display: none;
+    }
+
+    .timeline-card {
+      padding: 20px;
+    }
+
+    .timeline-rocket {
+      left: 20px;
+      font-size: 1.3rem;
+    }
+
+    .rocket-trail {
+      height: 35px;
+      top: -45px;
+    }
+
+    .timeline-header {
+      margin-bottom: 50px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .timeline-page {
+      padding: 100px 3% 40px;
+    }
+
+    .timeline-title {
+      font-size: 0.95rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.8rem;
+    }
+
+    .timeline-year {
+      font-size: 0.65rem;
+    }
+
+    .timeline-icon {
+      font-size: 1.2rem;
+    }
+
+    .timeline-item {
+      margin-bottom: 50px;
+    }
+
+    .timeline-card {
+      padding: 15px;
+    }
+
+    .shooting-star {
+      display: none;
+    }
+  }
