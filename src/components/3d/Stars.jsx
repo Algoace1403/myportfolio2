@@ -5,11 +5,9 @@ import * as THREE from 'three'
 
 function StarField() {
   const starsRef = useRef()
-  const shootingRef = useRef([])
-
   const count = 1500
 
-  const { positions, sizes } = useMemo(() => {
+  const { positions } = useMemo(() => {
     const positions = new Float32Array(count * 3)
     const sizes = new Float32Array(count)
 

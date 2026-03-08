@@ -4,7 +4,7 @@ import * as THREE from 'three'
 
 function ParticleField({ count = 3000 }) {
   const meshRef = useRef()
-  const mouseRef = useRef({ x: 0, y: 0 })
+  // mouse tracking reserved for future use
 
   const particles = useMemo(() => {
     const positions = new Float32Array(count * 3)
