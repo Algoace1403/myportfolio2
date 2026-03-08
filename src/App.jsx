@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import Loader from './components/ui/Loader'
 import Navbar from './components/ui/Navbar'
 import CustomCursor from './components/ui/CustomCursor'
