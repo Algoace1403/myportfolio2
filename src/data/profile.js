@@ -6,10 +6,10 @@ const profile = {
   name: 'Anuj Kumar Soni',
   aka: 'AKS',
   title: 'Full Stack Developer & Creative Technologist',
-  location: 'India',
-  coordinates: { lat: '28.6139°N', lng: '77.2090°E' },
-  email: 'your@email.com',
-  resumeUrl: '/resume.pdf',
+  location: 'Bangalore, India',
+  coordinates: { lat: '12.9784°N', lng: '77.6408°E' },
+  email: 'anuj.soni1403@gmail.com',
+  resumeUrl: '#',
 
   // Rotating hero titles
   heroTitles: [
@@ -29,6 +29,13 @@ const profile = {
     "Currently obsessed with the intersection of creative technology and real-world impact. I believe the best software feels like magic.",
     "When I'm not shipping features, I'm experimenting with shaders, training models, or breaking things to understand how they work.",
   ],
+
+  // Education
+  education: {
+    degree: 'Undergraduate in CSE',
+    institution: 'IIT Madras',
+    batch: '2025–2029',
+  },
 
   // Vision / Future Roadmap
   vision: {

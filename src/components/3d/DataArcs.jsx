@@ -1,10 +1,7 @@
 import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-
-// Data arcs connecting skill regions.
-// Start/end points lifted to r=2.6 (well above planet r=2) to prevent clipping.
-// Arc peaks at r=3.8 (outside atmosphere r=3.5) for clean separation.
+import { ARC_SURFACE, ARC_PEAK } from './globeConfig'
 
 const ARC_CONNECTIONS = [
   { from: [-1.6, 0.8, 1.2], to: [1.4, -0.3, 1.5], color: '#00ccff' },
@@ -14,22 +11,17 @@ const ARC_CONNECTIONS = [
   { from: [1.5, 0.6, -1.2], to: [-1.6, 0.8, 1.2], color: '#ffcc00' },
 ]
 
-const SURFACE_RADIUS = 2.6
-const ARC_HEIGHT = 3.8
-
 function Arc({ from, to, color, index }) {
   const lineRef = useRef()
 
   const { points } = useMemo(() => {
-    const start = new THREE.Vector3(...from).normalize().multiplyScalar(SURFACE_RADIUS)
-    const end = new THREE.Vector3(...to).normalize().multiplyScalar(SURFACE_RADIUS)
-
+    const start = new THREE.Vector3(...from).normalize().multiplyScalar(ARC_SURFACE)
+    const end = new THREE.Vector3(...to).normalize().multiplyScalar(ARC_SURFACE)
     const mid = new THREE.Vector3()
       .addVectors(start, end)
       .multiplyScalar(0.5)
       .normalize()
-      .multiplyScalar(ARC_HEIGHT)
-
+      .multiplyScalar(ARC_PEAK)
     const c = new THREE.QuadraticBezierCurve3(start, mid, end)
     return { points: c.getPoints(50) }
   }, [from, to])
@@ -62,13 +54,13 @@ function ArcParticle({ from, to, color, index }) {
   const meshRef = useRef()
 
   const curve = useMemo(() => {
-    const start = new THREE.Vector3(...from).normalize().multiplyScalar(SURFACE_RADIUS)
-    const end = new THREE.Vector3(...to).normalize().multiplyScalar(SURFACE_RADIUS)
+    const start = new THREE.Vector3(...from).normalize().multiplyScalar(ARC_SURFACE)
+    const end = new THREE.Vector3(...to).normalize().multiplyScalar(ARC_SURFACE)
     const mid = new THREE.Vector3()
       .addVectors(start, end)
       .multiplyScalar(0.5)
       .normalize()
-      .multiplyScalar(ARC_HEIGHT)
+      .multiplyScalar(ARC_PEAK)
     return new THREE.QuadraticBezierCurve3(start, mid, end)
   }, [from, to])
 

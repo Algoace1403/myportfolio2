@@ -38,10 +38,10 @@ function Contact() {
           </a>
 
           <div className="contact-socials">
-            <a href="https://github.com" target="_blank" rel="noreferrer" className="social-link hover-target">
+            <a href="https://github.com/Algoace1403" target="_blank" rel="noreferrer" className="social-link hover-target">
               <FaGithub />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social-link hover-target">
+            <a href="https://www.linkedin.com/in/anuj-kumar-soni-7669b7375/" target="_blank" rel="noreferrer" className="social-link hover-target">
               <FaLinkedin />
             </a>
             <a href="https://twitter.com" target="_blank" rel="noreferrer" className="social-link hover-target">

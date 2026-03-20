@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import { Html } from '@react-three/drei'
 import { CONTINENTS } from './PlanetWorld'
+import { LABEL_SCALE } from './globeConfig'
 
-// Labels are positioned well above the planet surface (r≈2.7-3.0).
-// No 3D line connectors (caused z-fighting).
-// No floating Y animation (caused clipping).
-// Pure HTML overlay via drei's <Html> — stable, readable, no depth issues.
-
-const LABEL_POSITIONS = [
+// Label base positions (designed for GLOBE_RADIUS=2).
+// Multiplied by LABEL_SCALE so they move proportionally when globe size changes.
+const LABEL_BASE_POSITIONS = [
   { pos: [-1.6, 1.1, 1.2], domain: 'Web Development', tools: ['React', 'Node.js', 'CSS', 'Next.js'], continentIdx: 0 },
   { pos: [1.4, 0.0, 1.5], domain: 'AI / Data', tools: ['Python', 'TensorFlow', 'LLMs', 'Pandas'], continentIdx: 1 },
   { pos: [0.2, 1.5, -1.7], domain: 'CS Fundamentals', tools: ['DSA', 'OOP', 'System Design', 'Git'], continentIdx: 2 },
@@ -18,12 +16,14 @@ const LABEL_POSITIONS = [
 
 function FloatingLabel({ position, domain, tools, color, isVisible, isFocused, onFocus }) {
   const [hovered, setHovered] = useState(false)
-
   const cssColor = `#${color.getHexString()}`
   const isActive = hovered || isFocused
 
+  // Scale position by LABEL_SCALE
+  const scaledPos = position.map((v) => v * LABEL_SCALE)
+
   return (
-    <group position={position}>
+    <group position={scaledPos}>
       <Html
         center
         distanceFactor={6}
@@ -35,8 +35,8 @@ function FloatingLabel({ position, domain, tools, color, isVisible, isFocused, o
       >
         <div
           className="hud-label"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
+          onPointerEnter={() => setHovered(true)}
+          onPointerLeave={() => setHovered(false)}
           onClick={() => onFocus?.()}
           style={{
             background: isActive
@@ -59,53 +59,29 @@ function FloatingLabel({ position, domain, tools, color, isVisible, isFocused, o
             position: 'relative',
           }}
         >
-          {/* HUD corner accents */}
           <div style={{
-            position: 'absolute', top: 0, left: 0,
-            width: '8px', height: '8px',
-            borderTop: `1px solid ${cssColor}`,
-            borderLeft: `1px solid ${cssColor}`,
-            borderRadius: '2px 0 0 0',
-            opacity: isActive ? 0.8 : 0.3,
-            transition: 'opacity 0.3s',
+            position: 'absolute', top: 0, left: 0, width: '8px', height: '8px',
+            borderTop: `1px solid ${cssColor}`, borderLeft: `1px solid ${cssColor}`,
+            borderRadius: '2px 0 0 0', opacity: isActive ? 0.8 : 0.3, transition: 'opacity 0.3s',
           }} />
           <div style={{
-            position: 'absolute', bottom: 0, right: 0,
-            width: '8px', height: '8px',
-            borderBottom: `1px solid ${cssColor}`,
-            borderRight: `1px solid ${cssColor}`,
-            borderRadius: '0 0 2px 0',
-            opacity: isActive ? 0.8 : 0.3,
-            transition: 'opacity 0.3s',
+            position: 'absolute', bottom: 0, right: 0, width: '8px', height: '8px',
+            borderBottom: `1px solid ${cssColor}`, borderRight: `1px solid ${cssColor}`,
+            borderRadius: '0 0 2px 0', opacity: isActive ? 0.8 : 0.3, transition: 'opacity 0.3s',
           }} />
-
-          {/* Domain name */}
           <div style={{
-            fontSize: '12px',
-            fontWeight: 700,
-            letterSpacing: '2px',
-            textTransform: 'uppercase',
-            color: cssColor,
-            marginBottom: isActive ? '8px' : '0',
-            transition: 'margin 0.3s',
+            fontSize: '12px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase',
+            color: cssColor, marginBottom: isActive ? '8px' : '0', transition: 'margin 0.3s',
           }}>
             {domain}
           </div>
-
-          {/* Expanded tools */}
           {isActive && (
-            <div style={{
-              display: 'flex', gap: '5px', flexWrap: 'wrap', marginTop: '4px',
-            }}>
+            <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap', marginTop: '4px' }}>
               {tools.map((tool) => (
                 <span key={tool} style={{
-                  fontSize: '9px',
-                  padding: '2px 8px',
-                  borderRadius: '10px',
-                  background: `${cssColor}18`,
-                  border: `1px solid ${cssColor}33`,
-                  color: 'rgba(255,255,255,0.7)',
-                  letterSpacing: '0.5px',
+                  fontSize: '9px', padding: '2px 8px', borderRadius: '10px',
+                  background: `${cssColor}18`, border: `1px solid ${cssColor}33`,
+                  color: 'rgba(255,255,255,0.7)', letterSpacing: '0.5px',
                   fontFamily: "'Space Mono', monospace",
                 }}>
                   {tool}
@@ -113,15 +89,10 @@ function FloatingLabel({ position, domain, tools, color, isVisible, isFocused, o
               ))}
             </div>
           )}
-
-          {/* Click hint */}
           {hovered && !isFocused && (
             <div style={{
-              fontSize: '8px',
-              color: `${cssColor}99`,
-              marginTop: '6px',
-              letterSpacing: '1.5px',
-              fontFamily: "'Space Mono', monospace",
+              fontSize: '8px', color: `${cssColor}99`, marginTop: '6px',
+              letterSpacing: '1.5px', fontFamily: "'Space Mono', monospace",
             }}>
               CLICK TO FOCUS
             </div>
@@ -135,7 +106,7 @@ function FloatingLabel({ position, domain, tools, color, isVisible, isFocused, o
 export default function ContinentLabels({ isVisible = true, focusContinent = -1, onFocusContinent }) {
   return (
     <group>
-      {LABEL_POSITIONS.map((label, i) => (
+      {LABEL_BASE_POSITIONS.map((label, i) => (
         <FloatingLabel
           key={label.domain}
           position={label.pos}
@@ -151,4 +122,4 @@ export default function ContinentLabels({ isVisible = true, focusContinent = -1,
   )
 }
 
-export { LABEL_POSITIONS }
+export { LABEL_BASE_POSITIONS as LABEL_POSITIONS }

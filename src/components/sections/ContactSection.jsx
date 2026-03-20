@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from 'react-icons/fa'
-import { FaXTwitter } from 'react-icons/fa6'
 import profile from '../../data/profile'
 import { socials } from '../../data/socials'
 import '../../styles/contact-section.css'
@@ -9,26 +8,61 @@ import '../../styles/contact-section.css'
 const ICON_MAP = {
   FaGithub: FaGithub,
   FaLinkedin: FaLinkedin,
-  FaXTwitter: FaXTwitter,
   FaInstagram: FaInstagram,
   FaEnvelope: FaEnvelope,
 }
 
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// FORMSPREE SETUP:
+// 1. Go to https://formspree.io and sign up (free tier = 50 submissions/month)
+// 2. Create a new form → you'll get an endpoint like https://formspree.io/f/xABCDEFG
+// 3. Replace the URL below with your endpoint
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mpqynrge'
+
 export default function ContactSection() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | sending | sent | error
   const formRef = useRef(null)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Placeholder — wire up to your backend/Formspree/Netlify Forms
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 4000)
-    setFormState({ name: '', email: '', message: '' })
+    setStatus('sending')
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+        }),
+      })
+
+      if (res.ok) {
+        setStatus('sent')
+        setFormState({ name: '', email: '', message: '' })
+        setTimeout(() => setStatus('idle'), 5000)
+      } else {
+        setStatus('error')
+        setTimeout(() => setStatus('idle'), 4000)
+      }
+    } catch {
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 4000)
+    }
   }
 
   const handleChange = (e) => {
     setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  const buttonText = {
+    idle: 'Send Message',
+    sending: 'Sending...',
+    sent: 'Message Sent ✓',
+    error: 'Failed — Try Again',
   }
 
   return (
@@ -108,7 +142,7 @@ export default function ContactSection() {
           </motion.div>
         </div>
 
-        {/* Right: Contact Form */}
+        {/* Right: Contact Form — powered by Formspree */}
         <motion.form
           ref={formRef}
           className="contact-form"
@@ -166,9 +200,9 @@ export default function ContactSection() {
           <button
             type="submit"
             className="contact-form__submit"
-            disabled={submitted}
+            disabled={status === 'sending' || status === 'sent'}
           >
-            {submitted ? 'Message Sent ✓' : 'Send Message'}
+            {buttonText[status]}
           </button>
         </motion.form>
       </div>

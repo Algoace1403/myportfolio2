@@ -162,8 +162,8 @@ const continents = [
       {
         name: 'Education',
         cities: [
-          { name: 'B.Tech CS', level: 100, icon: '◆' },
-          { name: 'Self-Taught Web', level: 100, icon: '◇' },
+          { name: 'UG in CSE — IIT Madras', level: 100, icon: '◆' },
+          { name: 'Self-Taught Web Dev', level: 100, icon: '◇' },
         ],
       },
       {

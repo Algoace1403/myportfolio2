@@ -1,9 +1,7 @@
 import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-
-// Two orbital rings, well outside atmosphere (r=3.5).
-// No pulsing nodes — just clean rotating rings with a single steady dot each.
+import { RING_INNER, RING_OUTER } from './globeConfig'
 
 function OrbitalRing({ radius, tilt, speed, color, opacity = 0.15 }) {
   const ringRef = useRef()
@@ -13,32 +11,21 @@ function OrbitalRing({ radius, tilt, speed, color, opacity = 0.15 }) {
     const segments = 128
     for (let i = 0; i <= segments; i++) {
       const angle = (i / segments) * Math.PI * 2
-      points.push(new THREE.Vector3(
-        Math.cos(angle) * radius,
-        0,
-        Math.sin(angle) * radius
-      ))
+      points.push(new THREE.Vector3(Math.cos(angle) * radius, 0, Math.sin(angle) * radius))
     }
     return new THREE.BufferGeometry().setFromPoints(points)
   }, [radius])
 
   useFrame(() => {
-    if (ringRef.current) {
-      ringRef.current.rotation.y += speed
-    }
+    if (ringRef.current) ringRef.current.rotation.y += speed
   })
 
   return (
     <group ref={ringRef} rotation={[tilt[0], 0, tilt[1]]}>
       <line geometry={geometry} renderOrder={5}>
         <lineDashedMaterial
-          color={color}
-          transparent
-          opacity={opacity}
-          dashSize={0.25}
-          gapSize={0.15}
-          linewidth={1}
-          depthWrite={false}
+          color={color} transparent opacity={opacity}
+          dashSize={0.25} gapSize={0.15} linewidth={1} depthWrite={false}
         />
       </line>
     </group>
@@ -52,10 +39,7 @@ function OrbitingNode({ radius, tilt, speed, color, size = 0.04 }) {
   useFrame(() => {
     if (!nodeRef.current) return
     angle.current += speed * 2
-    const x = Math.cos(angle.current) * radius
-    const z = Math.sin(angle.current) * radius
-    nodeRef.current.position.set(x, 0, z)
-    // No scale pulsing — steady size
+    nodeRef.current.position.set(Math.cos(angle.current) * radius, 0, Math.sin(angle.current) * radius)
   })
 
   return (
@@ -70,8 +54,8 @@ function OrbitingNode({ radius, tilt, speed, color, size = 0.04 }) {
 
 export default function OrbitalRings() {
   const rings = [
-    { radius: 4.2, tilt: [0.3, 0.1], speed: 0.001, color: '#00ccff', opacity: 0.15 },
-    { radius: 4.8, tilt: [-0.2, 0.4], speed: -0.0008, color: '#8800ff', opacity: 0.1 },
+    { radius: RING_INNER, tilt: [0.3, 0.1], speed: 0.001, color: '#00ccff', opacity: 0.15 },
+    { radius: RING_OUTER, tilt: [-0.2, 0.4], speed: -0.0008, color: '#8800ff', opacity: 0.1 },
   ]
 
   return (
@@ -79,13 +63,7 @@ export default function OrbitalRings() {
       {rings.map((ring, i) => (
         <group key={i}>
           <OrbitalRing {...ring} />
-          <OrbitingNode
-            radius={ring.radius}
-            tilt={ring.tilt}
-            speed={ring.speed}
-            color={ring.color}
-            size={0.035}
-          />
+          <OrbitingNode radius={ring.radius} tilt={ring.tilt} speed={ring.speed} color={ring.color} size={0.035} />
         </group>
       ))}
     </group>

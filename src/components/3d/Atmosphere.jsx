@@ -1,54 +1,70 @@
-import { useRef, useMemo } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useMemo } from 'react'
 import * as THREE from 'three'
+import { ATMOSPHERE_RADIUS } from './globeConfig'
 
-// Atmosphere glow — rendered on BackSide far from planet surface.
-// Uses normal alpha blending (NOT additive) for stable compositing.
-// No pulsing, no animation — purely view-angle dependent.
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Atmosphere — razor-thin blue rim at the Earth's edge.
+// Barely larger than the planet. Rendered on BackSide so
+// it only shows as a thin glow at the silhouette.
+// Very low opacity — enhances realism without creating
+// a visible transparent shell.
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const atmosphereVertexShader = `
+const vertShader = `
   varying vec3 vNormal;
   varying vec3 vPosition;
+  varying vec3 vWorldNormal;
 
   void main() {
     vNormal = normalize(normalMatrix * normal);
+    vWorldNormal = normalize((modelMatrix * vec4(normal, 0.0)).xyz);
     vPosition = (modelViewMatrix * vec4(position, 1.0)).xyz;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
 `
 
-const atmosphereFragmentShader = `
+const fragShader = `
   varying vec3 vNormal;
   varying vec3 vPosition;
+  varying vec3 vWorldNormal;
+
   uniform float uIntensity;
+  uniform vec3 uSunDirection;
 
   void main() {
     vec3 viewDir = normalize(-vPosition);
-    float fresnel = pow(1.0 - max(dot(vNormal, viewDir), 0.0), 3.0);
+    float NdotV = max(dot(vNormal, viewDir), 0.0);
 
-    vec3 innerColor = vec3(0.08, 0.35, 0.9);
-    vec3 outerColor = vec3(0.0, 0.6, 1.0);
-    vec3 color = mix(innerColor, outerColor, fresnel);
+    // Very steep fresnel — only visible at the extreme edge
+    float fresnel = pow(1.0 - NdotV, 6.0);
 
-    float alpha = fresnel * uIntensity * 0.45;
+    // Sun-aware color
+    float sunDot = dot(vWorldNormal, uSunDirection);
+    vec3 rimColor = mix(
+      vec3(0.05, 0.15, 0.5),  // dark blue on night side
+      vec3(0.3, 0.6, 1.0),     // bright blue on day side
+      smoothstep(-0.2, 0.3, sunDot)
+    );
 
-    gl_FragColor = vec4(color, alpha);
+    // Very low alpha — just a hint of atmospheric glow
+    float alpha = fresnel * uIntensity * smoothstep(-0.3, 0.1, sunDot) * 0.3;
+
+    gl_FragColor = vec4(rimColor, alpha);
   }
 `
 
-export default function Atmosphere({ radius = 3.5, intensity = 0.6 }) {
-  const meshRef = useRef()
-
+export default function Atmosphere({ intensity = 0.5 }) {
   const uniforms = useMemo(() => ({
     uIntensity: { value: intensity },
+    uSunDirection: { value: new THREE.Vector3(1, 0.3, 0.5).normalize() },
   }), [intensity])
 
   return (
-    <mesh ref={meshRef} renderOrder={3}>
-      <icosahedronGeometry args={[radius, 32]} />
+    <mesh renderOrder={3}>
+      <icosahedronGeometry args={[ATMOSPHERE_RADIUS, 32]} />
       <shaderMaterial
-        vertexShader={atmosphereVertexShader}
-        fragmentShader={atmosphereFragmentShader}
+        vertexShader={vertShader}
+        fragmentShader={fragShader}
         uniforms={uniforms}
         transparent
         side={THREE.BackSide}
