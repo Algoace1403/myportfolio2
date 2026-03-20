@@ -1,0 +1,123 @@
+.world-legend {
+  position: absolute;
+  top: 100px;
+  right: 40px;
+  z-index: 4;
+  pointer-events: auto;
+}
+
+.world-legend__toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(8, 8, 24, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 204, 255, 0.2);
+  border-radius: 8px;
+  padding: 8px 14px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.world-legend__toggle:hover {
+  border-color: rgba(0, 204, 255, 0.5);
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 204, 255, 0.08);
+}
+
+.world-legend__toggle-icon {
+  font-size: 12px;
+  color: #00ccff;
+}
+
+.world-legend__panel {
+  margin-top: 8px;
+  background: rgba(8, 8, 24, 0.88);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 204, 255, 0.15);
+  border-radius: 12px;
+  padding: 20px;
+  overflow: hidden;
+  min-width: 220px;
+}
+
+.world-legend__title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #00ccff;
+  margin-bottom: 4px;
+}
+
+.world-legend__subtitle {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 16px;
+}
+
+.world-legend__items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.world-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.world-legend__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.world-legend__item-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.world-legend__symbols {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.world-legend__symbol-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.world-legend__symbol-icon {
+  width: 16px;
+  text-align: center;
+  color: rgba(0, 204, 255, 0.4);
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .world-legend {
+    top: auto;
+    bottom: 90px;
+    right: 16px;
+  }
+
+  .world-legend__panel {
+    min-width: 180px;
+  }
+}

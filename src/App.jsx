@@ -1,20 +1,18 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
+import { PerformanceProvider } from './context/PerformanceContext'
 import Loader from './components/ui/Loader'
 import Navbar from './components/ui/Navbar'
 import CustomCursor from './components/ui/CustomCursor'
 import StarsBackground from './components/3d/Stars'
+import SmoothScroll from './components/ui/SmoothScroll'
+import CommandPalette from './components/ui/CommandPalette'
+import SectionIndicator from './components/ui/SectionIndicator'
 import Home from './pages/Home'
 import Work from './pages/Work'
 import Timeline from './pages/Timeline'
 import Fun from './pages/Fun'
 import ContactPage from './pages/ContactPage'
-
-const pageTransition = {
-  initial: { opacity: 0, clipPath: 'circle(0% at 50% 50%)' },
-  animate: { opacity: 1, clipPath: 'circle(150% at 50% 50%)' },
-  exit: { opacity: 0, clipPath: 'circle(0% at 50% 50%)' },
-}
 
 function AnimatedRoutes() {
   const location = useLocation()
@@ -23,10 +21,10 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <motion.div
         key={location.pathname}
-        initial={pageTransition.initial}
-        animate={pageTransition.animate}
-        exit={pageTransition.exit}
-        transition={{ duration: 0.7, ease: 'easeInOut' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.4, ease: 'easeInOut' }}
       >
         <Routes location={location}>
           <Route path="/" element={<Home />} />
@@ -42,13 +40,19 @@ function AnimatedRoutes() {
 
 function App() {
   return (
-    <Router>
-      <Loader />
-      <StarsBackground />
-      <CustomCursor />
-      <Navbar />
-      <AnimatedRoutes />
-    </Router>
+    <PerformanceProvider>
+      <Router>
+        <SmoothScroll>
+          <Loader />
+          <StarsBackground />
+          <CustomCursor />
+          <Navbar />
+          <CommandPalette />
+          <SectionIndicator />
+          <AnimatedRoutes />
+        </SmoothScroll>
+      </Router>
+    </PerformanceProvider>
   )
 }
 

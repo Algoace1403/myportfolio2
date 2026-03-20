@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
   * {
     margin: 0;
@@ -7,17 +7,30 @@
   }
 
   :root {
-    --bg-primary: #000011;
-    --star-blue: #4fc3f7;
+    --bg-primary: #050510;
+    --bg-secondary: #0a0a1a;
+    --bg-card: rgba(255, 255, 255, 0.025);
+    --star-blue: #00ccff;
     --nebula-pink: #e040fb;
+    --accent-purple: #8800ff;
+    --accent-cyan: #00ccff;
+    --accent-orange: #ff6600;
+    --accent-green: #00ff88;
+    --accent-pink: #ff3388;
+    --accent-gold: #ffaa33;
     --white: #ffffff;
     --gray: #8892b0;
-    --font-heading: 'Orbitron', sans-serif;
-    --font-body: 'Poppins', sans-serif;
+    --gray-dim: rgba(255, 255, 255, 0.35);
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-accent: rgba(0, 204, 255, 0.2);
+    --font-heading: 'Space Grotesk', 'Orbitron', sans-serif;
+    --font-body: 'Inter', 'Poppins', sans-serif;
+    --font-mono: 'Space Mono', 'JetBrains Mono', monospace;
+    --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   html {
-    scroll-behavior: smooth;
+    /* Lenis handles smooth scrolling — CSS scroll-behavior disabled to prevent conflicts */
   }
 
   body {
@@ -29,21 +42,39 @@
   }
 
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--bg-primary);
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--star-blue);
-    border-radius: 3px;
+    background: rgba(0, 204, 255, 0.25);
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 204, 255, 0.4);
+  }
+
+  ::selection {
+    background: rgba(0, 204, 255, 0.2);
+    color: #fff;
   }
 
   a {
     text-decoration: none;
     color: inherit;
+    transition: color 0.3s ease, opacity 0.3s ease;
+  }
+
+  button {
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  img {
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
   section {
@@ -104,5 +135,96 @@
     height: 100%;
     z-index: 0;
     pointer-events: none;
+  }
+
+  /* ========== ACCESSIBILITY ========== */
+
+  /* Focus-visible styles that match the design */
+  *:focus-visible {
+    outline: 2px solid rgba(0, 204, 255, 0.6);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Skip to content link */
+  .skip-to-content {
+    position: fixed;
+    top: -100px;
+    left: 16px;
+    z-index: 10000;
+    padding: 12px 20px;
+    background: var(--bg-primary);
+    border: 1px solid var(--accent-cyan);
+    border-radius: 8px;
+    color: var(--accent-cyan);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: top 0.2s ease;
+  }
+
+  .skip-to-content:focus {
+    top: 16px;
+  }
+
+  /* Screen reader only */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* ========== REDUCED MOTION ========== */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .home-world__canvas {
+      /* Still show the static 3D scene, just no animations */
+    }
+
+    /* Hide purely decorative animated elements */
+    .hero-overlay__scroll-wheel,
+    .hero-overlay__hud-line {
+      display: none;
+    }
+  }
+
+  /* ========== PRINT ========== */
+  @media print {
+    body::after,
+    .stars-background,
+    .custom-cursor,
+    .navbar,
+    .cmd-trigger,
+    .section-indicator,
+    .home-world__canvas {
+      display: none !important;
+    }
+
+    body {
+      background: #fff;
+      color: #000;
+      cursor: auto;
+    }
+
+    section {
+      min-height: auto;
+      padding: 20px;
+      break-inside: avoid;
+    }
   }
   

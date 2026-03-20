@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
-import Contact from '../components/sections/Contact'
+import ContactSection from '../components/sections/ContactSection'
+import Footer from '../components/ui/Footer'
 
-function ContactPage() {
+export default function ContactPage() {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -9,9 +10,8 @@ function ContactPage() {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
     >
-      <Contact />
+      <ContactSection />
+      <Footer />
     </motion.div>
   )
 }
-
-export default ContactPage

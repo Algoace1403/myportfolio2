@@ -1,0 +1,130 @@
+.about-section {
+  padding: 120px 5% 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.about-section__content {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 60px;
+  align-items: start;
+}
+
+.about-section__name {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  margin: 12px 0 4px;
+  letter-spacing: 0.5px;
+}
+
+.about-section__title {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(0, 204, 255, 0.6);
+  margin: 0 0 24px;
+}
+
+.about-section__paragraph {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 16px;
+}
+
+.about-section__traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.trait-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(0, 204, 255, 0.06);
+  border: 1px solid rgba(0, 204, 255, 0.15);
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+/* Stats cards */
+.about-section__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  border-color: rgba(0, 204, 255, 0.2);
+  background: rgba(0, 204, 255, 0.04);
+  transform: translateY(-2px);
+}
+
+.stat-card__icon {
+  font-size: 16px;
+  color: rgba(0, 204, 255, 0.5);
+  margin-bottom: 4px;
+}
+
+.stat-card__value {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.stat-card__label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: 80px 4% 60px;
+  }
+
+  .about-section__content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-section__stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .about-section__name {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
