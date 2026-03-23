@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, useEffect } from 'react'
 import { useFrame, Canvas } from '@react-three/fiber'
 
 // Background star field — completely static geometry.
@@ -24,6 +24,16 @@ function StarField() {
       starsRef.current.rotation.y += 0.00008
     }
   })
+
+  // Dispose geometry on unmount
+  useEffect(() => {
+    return () => {
+      if (starsRef.current) {
+        starsRef.current.geometry?.dispose()
+        starsRef.current.material?.dispose()
+      }
+    }
+  }, [])
 
   return (
     <points ref={starsRef}>

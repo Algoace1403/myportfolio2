@@ -1,7 +1,63 @@
+/* ═══ MARQUEE CTA ═══ */
+.marquee-wrapper {
+  overflow: hidden;
+  padding: 48px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 0 1.5rem;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+  transition: color 0.4s var(--ease-premium), -webkit-text-stroke-color 0.4s var(--ease-premium);
+  display: inline-block;
+}
+
+.marquee-item:hover {
+  color: var(--white);
+  -webkit-text-stroke-color: transparent;
+}
+
+.marquee-dash {
+  margin: 0 0.8rem;
+  opacity: 0.3;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ═══ FOOTER ═══ */
 .site-footer {
-  padding: 40px 5% 32px;
+  padding: 0 5% 32px;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.site-footer__inner {
+  padding-top: 0;
 }
 
 .site-footer__divider {
@@ -29,7 +85,7 @@
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 4px;
-  background: linear-gradient(135deg, #fff, #00aaff);
+  background: linear-gradient(135deg, #fff, var(--star-blue));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -46,16 +102,17 @@
   font-size: 10px;
   letter-spacing: 2px;
   color: rgba(255, 255, 255, 0.3);
-  text-decoration: none;
-  padding: 8px 14px;
+  background: none;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  display: inline-block;
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: color var(--transition-base), border-color var(--transition-base);
 }
 
-.site-footer__back-top:hover {
-  color: rgba(0, 204, 255, 0.7);
+.site-footer__back-top:hover,
+.site-footer__back-top:focus-visible {
+  color: var(--star-blue);
   border-color: rgba(0, 204, 255, 0.3);
 }
 
@@ -68,6 +125,10 @@
 }
 
 @media (max-width: 768px) {
+  .marquee-item {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+  }
+
   .site-footer__content {
     flex-direction: column;
     gap: 16px;

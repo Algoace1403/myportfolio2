@@ -7,13 +7,17 @@ function OrbitalRing({ radius, tilt, speed, color, opacity = 0.15 }) {
   const ringRef = useRef()
 
   const geometry = useMemo(() => {
-    const points = []
     const segments = 128
+    const positions = new Float32Array((segments + 1) * 3)
     for (let i = 0; i <= segments; i++) {
       const angle = (i / segments) * Math.PI * 2
-      points.push(new THREE.Vector3(Math.cos(angle) * radius, 0, Math.sin(angle) * radius))
+      positions[i * 3] = Math.cos(angle) * radius
+      positions[i * 3 + 1] = 0
+      positions[i * 3 + 2] = Math.sin(angle) * radius
     }
-    return new THREE.BufferGeometry().setFromPoints(points)
+    const g = new THREE.BufferGeometry()
+    g.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+    return g
   }, [radius])
 
   useFrame(() => {

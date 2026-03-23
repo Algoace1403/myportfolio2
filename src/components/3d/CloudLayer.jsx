@@ -40,10 +40,8 @@ const cloudFragmentShader = `
     vec3 shadow = vec3(0.1, 0.12, 0.2);
     vec3 color = mix(shadow, sunlit, brightness);
 
-    // Alpha from cloud density — only show where there are clouds
-    float alpha = cloud * 0.45 * brightness;
-    // Soften thin clouds
-    alpha *= smoothstep(0.02, 0.15, cloud);
+    // Single alpha pass — density × brightness × thin-cloud softening
+    float alpha = cloud * 0.45 * brightness * smoothstep(0.02, 0.15, cloud);
 
     gl_FragColor = vec4(color, alpha);
   }

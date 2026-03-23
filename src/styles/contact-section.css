@@ -1,5 +1,5 @@
 .contact-section {
-  padding: 120px 5% 80px;
+  padding: 60px 5% 80px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -171,15 +171,52 @@
 
 @media (max-width: 768px) {
   .contact-section {
-    padding: 80px 4% 60px;
+    padding: 40px 4%;
   }
 
   .contact-section__inner {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 32px;
   }
 
   .contact-section__headline {
     font-size: 28px;
+  }
+
+  .contact-form__input {
+    font-size: 14px;
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 30px 3%;
+  }
+
+  .contact-section__headline {
+    font-size: 22px;
+  }
+
+  .contact-section__description {
+    font-size: 13px;
+  }
+
+  .contact-section__email {
+    font-size: 13px;
+  }
+
+  .contact-section__socials {
+    gap: 10px;
+  }
+
+  .contact-section__social-link {
+    width: 36px;
+    height: 36px;
+  }
+
+  .contact-form__submit {
+    padding: 12px 20px;
+    font-size: 13px;
   }
 }

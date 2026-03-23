@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { continents } from '../../data/skills'
+import TextReveal from '../ui/TextReveal'
 import '../../styles/continent-explorer.css'
 
 function SkillBar({ name, level, color, delay }) {
@@ -45,14 +46,7 @@ export default function ContinentExplorer() {
         >
           SKILL DOMAINS
         </motion.span>
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          Explore My Continents
-        </motion.h2>
+        <TextReveal text="Explore My Continents" tag="h2" className="section-title" />
       </div>
 
       {/* Continent selector */}

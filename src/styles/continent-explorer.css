@@ -1,5 +1,5 @@
 .continent-explorer {
-  padding: 120px 5% 80px;
+  padding: 60px 5%;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
@@ -162,7 +162,7 @@
 
 @media (max-width: 768px) {
   .continent-explorer {
-    padding: 80px 4% 60px;
+    padding: 40px 4%;
   }
 
   .section-title {
@@ -179,7 +179,33 @@
 }
 
 @media (max-width: 480px) {
+  .continent-explorer {
+    padding: 30px 3%;
+  }
+
+  .continent-explorer__header {
+    margin-bottom: 32px;
+  }
+
   .continent-selector {
     grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .continent-btn {
+    padding: 12px 16px;
+    font-size: 12px;
+  }
+
+  .continent-detail__inner {
+    padding: 16px;
+  }
+
+  .skill-bar__name {
+    font-size: 12px;
+  }
+
+  .section-title {
+    font-size: 22px;
   }
 }

@@ -1,39 +1,83 @@
 .custom-cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--star-blue);
-    border-radius: 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease, background-color 0.2s ease;
-    mix-blend-mode: difference;
-  }
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              background-color 0.3s ease,
+              opacity 0.3s ease;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
 
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover on links / buttons */
+.custom-cursor.hover {
+  width: 50px;
+  height: 50px;
+  border-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.custom-cursor.hover + .cursor-dot {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+/* Hover on project cards */
+.custom-cursor.is-project {
+  width: 80px;
+  height: 80px;
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.custom-cursor.is-project::after {
+  content: 'View';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.custom-cursor.is-project + .cursor-dot {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+/* Hide custom cursor on touch/mobile devices */
+@media (max-width: 768px), (pointer: coarse) {
+  .custom-cursor,
   .cursor-dot {
-    width: 6px;
-    height: 6px;
-    background-color: var(--nebula-pink);
-    border-radius: 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9999;
+    display: none !important;
   }
-
-  .custom-cursor.hover {
-    transform: scale(2.5);
-    background-color: rgba(79, 195, 247, 0.15);
-    border-color: var(--nebula-pink);
-  }
-
-  /* Hide custom cursor on touch/mobile devices */
-  @media (max-width: 768px), (pointer: coarse) {
-    .custom-cursor,
-    .cursor-dot {
-      display: none !important;
-    }
-  }
+}

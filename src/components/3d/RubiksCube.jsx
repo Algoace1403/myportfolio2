@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback, memo } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 
@@ -71,7 +71,7 @@ function rotateFace(cubies, axis, layer, cw) {
   })
 }
 
-function Cubie({ position, colors }) {
+const Cubie = memo(function Cubie({ position, colors }) {
   return (
     <mesh position={position}>
       <boxGeometry args={[0.9, 0.9, 0.9]} />
@@ -80,16 +80,16 @@ function Cubie({ position, colors }) {
       ))}
     </mesh>
   )
-}
+})
 
 function RubiksCubeScene() {
   const [cubies, setCubies] = useState(createCube)
 
-  const move = (axis, layer, cw) => {
+  const move = useCallback((axis, layer, cw) => {
     setCubies((prev) => rotateFace(prev, axis, layer, cw))
-  }
+  }, [])
 
-  const scramble = () => {
+  const scramble = useCallback(() => {
     let c = createCube()
 
     const allMoves = [
@@ -113,11 +113,11 @@ function RubiksCubeScene() {
     }
 
     setCubies(c)
-  }
+  }, [])
 
-  const reset = () => {
+  const reset = useCallback(() => {
     setCubies(createCube())
-  }
+  }, [])
 
   return (
     <div className="cube-scene">

@@ -1,5 +1,6 @@
 import { Suspense, useRef, useCallback } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
+import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import { usePerformance } from '../../context/PerformanceContext'
 import PlanetWorld from './PlanetWorld'
 import CloudLayer from './CloudLayer'
@@ -202,6 +203,19 @@ export default function WorldScene({ labelsVisible = true, introComplete = true 
 
         {/* ━━━ Camera ━━━ */}
         <CameraController introComplete={introComplete} />
+
+        {/* ━━━ Post-processing — bloom + vignette ━━━ */}
+        {perf.postProcessing && (
+          <EffectComposer multisampling={0}>
+            <Bloom
+              luminanceThreshold={0.6}
+              luminanceSmoothing={0.4}
+              intensity={0.7}
+              mipmapBlur
+            />
+            <Vignette offset={0.3} darkness={0.6} />
+          </EffectComposer>
+        )}
       </Suspense>
     </Canvas>
   )

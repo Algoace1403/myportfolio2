@@ -1,6 +1,6 @@
 .timeline-page {
-    min-height: 100vh;
-    padding: 120px 5% 60px;
+    min-height: auto;
+    padding: 60px 5% 60px;
     position: relative;
     overflow: hidden;
   }
@@ -277,7 +277,7 @@
 
   @media (max-width: 480px) {
     .timeline-page {
-      padding: 100px 3% 40px;
+      padding: 30px 3%;
     }
 
     .timeline-title {

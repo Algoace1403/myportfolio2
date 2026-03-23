@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import profile from '../../data/profile'
 import { achievements } from '../../data/timeline'
+import TextReveal from '../ui/TextReveal'
+import useScrollReveal from '../../hooks/useScrollReveal'
 import '../../styles/about-section.css'
 
 const ease = [0.25, 0.1, 0.25, 1.0]
@@ -12,6 +14,12 @@ const reveal = (delay = 0) => ({
 })
 
 export default function AboutSection() {
+  const statsRef = useScrollReveal({
+    childSelector: '.stat-card',
+    stagger: 0.1,
+    y: 40,
+  })
+
   return (
     <section className="about-section" id="about">
       <div className="about-section__inner">
@@ -21,9 +29,12 @@ export default function AboutSection() {
 
         <div className="about-section__content">
           <div className="about-section__bio">
-            <motion.h2 className="about-section__name" {...reveal(0.1)}>
-              {profile.name}
-            </motion.h2>
+            <TextReveal
+              text={profile.name}
+              tag="h2"
+              className="about-section__name"
+              delay={0.1}
+            />
             <motion.p className="about-section__title" {...reveal(0.15)}>
               {profile.title}
             </motion.p>
@@ -45,20 +56,13 @@ export default function AboutSection() {
             </motion.div>
           </div>
 
-          <div className="about-section__stats">
-            {achievements.map((stat, i) => (
-              <motion.div
-                key={stat.id}
-                className="stat-card"
-                initial={{ opacity: 0, y: 16, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ delay: 0.25 + i * 0.08, duration: 0.6, ease }}
-              >
+          <div className="about-section__stats" ref={statsRef}>
+            {achievements.map((stat) => (
+              <div key={stat.id} className="stat-card">
                 <span className="stat-card__icon">{stat.icon}</span>
                 <span className="stat-card__value">{stat.value}</span>
                 <span className="stat-card__label">{stat.label}</span>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

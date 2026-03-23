@@ -1,5 +1,5 @@
 .vision-section {
-  padding: 120px 5% 100px;
+  padding: 60px 5%;
   max-width: 900px;
   margin: 0 auto;
 }
@@ -68,6 +68,32 @@
 
 @media (max-width: 768px) {
   .vision-section {
-    padding: 80px 4% 60px;
+    padding: 40px 4%;
+  }
+
+  .vision-section__statement {
+    font-size: 14px;
+  }
+
+  .roadmap-item__goal {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .vision-section {
+    padding: 30px 3%;
+  }
+
+  .vision-section__statement {
+    font-size: 13px;
+  }
+
+  .roadmap-item__year {
+    font-size: 11px;
+  }
+
+  .roadmap-item__goal {
+    font-size: 12px;
   }
 }

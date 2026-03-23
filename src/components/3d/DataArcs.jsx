@@ -53,7 +53,8 @@ function Arc({ from, to, color, index }) {
 function ArcParticle({ from, to, color, index }) {
   const meshRef = useRef()
 
-  const curve = useMemo(() => {
+  // Pre-compute 60 points along the curve (avoids per-frame curve evaluation)
+  const curvePoints = useMemo(() => {
     const start = new THREE.Vector3(...from).normalize().multiplyScalar(ARC_SURFACE)
     const end = new THREE.Vector3(...to).normalize().multiplyScalar(ARC_SURFACE)
     const mid = new THREE.Vector3()
@@ -61,15 +62,20 @@ function ArcParticle({ from, to, color, index }) {
       .multiplyScalar(0.5)
       .normalize()
       .multiplyScalar(ARC_PEAK)
-    return new THREE.QuadraticBezierCurve3(start, mid, end)
+    const curve = new THREE.QuadraticBezierCurve3(start, mid, end)
+    return curve.getPoints(60)
   }, [from, to])
 
   useFrame((state) => {
     if (!meshRef.current) return
     const t = state.clock.elapsedTime * 0.2 + index * 0.4
     const progress = (t % 1 + 1) % 1
-    const pos = curve.getPoint(progress)
-    meshRef.current.position.copy(pos)
+    // Interpolate between cached points instead of curve.getPoint()
+    const idx = progress * (curvePoints.length - 1)
+    const i0 = Math.floor(idx)
+    const i1 = Math.min(i0 + 1, curvePoints.length - 1)
+    const alpha = idx - i0
+    meshRef.current.position.lerpVectors(curvePoints[i0], curvePoints[i1], alpha)
   })
 
   return (

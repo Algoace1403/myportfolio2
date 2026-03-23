@@ -9,17 +9,24 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 10000;
+    z-index: var(--z-loader);
     overflow: hidden;
   }
 
   .loader.loaded {
-    animation: loader-exit 1s ease forwards;
+    animation: loader-exit 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+    pointer-events: none;
   }
 
   @keyframes loader-exit {
-    0% { clip-path: circle(100% at 50% 50%); }
-    100% { clip-path: circle(0% at 50% 50%); }
+    0% {
+      clip-path: inset(0 0 0% 0);
+      opacity: 1;
+    }
+    100% {
+      clip-path: inset(0 0 100% 0);
+      opacity: 1;
+    }
   }
 
   /* GRID BACKGROUND */
@@ -80,6 +87,16 @@
   @keyframes letter-float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
+  }
+
+  .loader-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--gray);
+    letter-spacing: 4px;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fade-in-up 0.8s ease 0.5s forwards;
   }
 
   @keyframes fade-in-up {

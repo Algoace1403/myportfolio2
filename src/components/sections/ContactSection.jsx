@@ -27,7 +27,16 @@ export default function ContactSection() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // Honeypot — bots fill this hidden field, humans don't
+    const honeypot = formRef.current?.querySelector('[name="_gotcha"]')
+    if (honeypot && honeypot.value) return
+
     setStatus('sending')
+
+    // Timeout — don't let user wait forever if endpoint is down
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 10000)
 
     try {
       const res = await fetch(FORMSPREE_ENDPOINT, {
@@ -38,7 +47,10 @@ export default function ContactSection() {
           email: formState.email,
           message: formState.message,
         }),
+        signal: controller.signal,
       })
+
+      clearTimeout(timeoutId)
 
       if (res.ok) {
         setStatus('sent')
@@ -49,6 +61,7 @@ export default function ContactSection() {
         setTimeout(() => setStatus('idle'), 4000)
       }
     } catch {
+      clearTimeout(timeoutId)
       setStatus('error')
       setTimeout(() => setStatus('idle'), 4000)
     }
@@ -153,6 +166,16 @@ export default function ContactSection() {
           transition={{ delay: 0.3 }}
           aria-label="Contact form"
         >
+          {/* Honeypot field — hidden from humans, traps bots */}
+          <input
+            type="text"
+            name="_gotcha"
+            tabIndex={-1}
+            autoComplete="off"
+            style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0 }}
+            aria-hidden="true"
+          />
+
           <div className="contact-form__field">
             <label htmlFor="contact-name" className="contact-form__label">Name</label>
             <input
@@ -201,9 +224,16 @@ export default function ContactSection() {
             type="submit"
             className="contact-form__submit"
             disabled={status === 'sending' || status === 'sent'}
+            aria-busy={status === 'sending'}
           >
             {buttonText[status]}
           </button>
+
+          {/* Screen reader announcement for form status */}
+          <div role="status" aria-live="polite" className="sr-only">
+            {status === 'sent' && 'Your message has been sent successfully.'}
+            {status === 'error' && 'Failed to send message. Please try again.'}
+          </div>
         </motion.form>
       </div>
     </section>

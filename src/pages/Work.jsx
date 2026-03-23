@@ -4,6 +4,7 @@ import RubiksCubeScene from '../components/3d/RubiksCube'
 import MacBookScene from '../components/3d/FloatingLaptop'
 import Skills from '../components/sections/Skills'
 import Projects from '../components/sections/Projects'
+import ErrorBoundary from '../components/ui/ErrorBoundary'
 import '../styles/work.css'
 
 function Work() {
@@ -17,11 +18,15 @@ function Work() {
       <section className="work-3d-section">
         <div className="work-3d-container">
           <div className="work-3d-item">
-            <RubiksCubeScene />
+            <ErrorBoundary>
+              <RubiksCubeScene />
+            </ErrorBoundary>
             <p className="work-3d-label">SOLVE THE CUBE</p>
           </div>
           <div className="work-3d-item">
-            <MacBookScene />
+            <ErrorBoundary>
+              <MacBookScene />
+            </ErrorBoundary>
             <p className="work-3d-label">MY WORKSPACE</p>
           </div>
         </div>

@@ -37,13 +37,14 @@ const socials = [
   },
 ]
 
-// Navigation links
+// Navigation links — all anchor scrolls on single page
 const navLinks = [
-  { label: 'World', path: '/', section: 'hero' },
-  { label: 'About', path: '/#about', section: 'about' },
-  { label: 'Projects', path: '/work', section: 'projects' },
-  { label: 'Journey', path: '/timeline', section: 'timeline' },
-  { label: 'Contact', path: '/contact', section: 'contact' },
+  { label: 'Home', href: '#hero' },
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Journey', href: '#journey' },
+  { label: 'Contact', href: '#contact' },
 ]
 
 export { socials, navLinks }

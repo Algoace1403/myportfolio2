@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import '../styles/timeline.css'
 
@@ -43,9 +43,14 @@ const milestones = [
 
 function Timeline() {
   const [rocketY, setRocketY] = useState(120)
+  const lastUpdateRef = useRef(0)
 
   useEffect(() => {
     const handleScroll = () => {
+      const now = Date.now()
+      if (now - lastUpdateRef.current < 100) return
+      lastUpdateRef.current = now
+
       const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight)
       const topLimit = 120
       const bottomLimit = window.innerHeight - 60
@@ -53,7 +58,7 @@ function Timeline() {
       setRocketY(y)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 

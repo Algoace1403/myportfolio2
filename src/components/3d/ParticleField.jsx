@@ -2,7 +2,7 @@ import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
-function ParticleField({ count = 3000 }) {
+function ParticleField({ count = 1500 }) {
   const meshRef = useRef()
   // mouse tracking reserved for future use
 

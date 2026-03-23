@@ -7,26 +7,77 @@
   }
 
   :root {
+    /* ── Colors ── */
     --bg-primary: #050510;
     --bg-secondary: #0a0a1a;
     --bg-card: rgba(255, 255, 255, 0.025);
     --star-blue: #00ccff;
     --nebula-pink: #e040fb;
     --accent-purple: #8800ff;
-    --accent-cyan: #00ccff;
     --accent-orange: #ff6600;
     --accent-green: #00ff88;
     --accent-pink: #ff3388;
     --accent-gold: #ffaa33;
     --white: #ffffff;
     --gray: #8892b0;
-    --gray-dim: rgba(255, 255, 255, 0.35);
+    --gray-dim: rgba(255, 255, 255, 0.5);
     --border-subtle: rgba(255, 255, 255, 0.06);
     --border-accent: rgba(0, 204, 255, 0.2);
+
+    /* ── Typography ── */
     --font-heading: 'Space Grotesk', 'Orbitron', sans-serif;
     --font-body: 'Inter', 'Poppins', sans-serif;
     --font-mono: 'Space Mono', 'JetBrains Mono', monospace;
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.25rem;
+    --text-xl: 1.5rem;
+    --text-2xl: 2rem;
+    --text-3xl: 3rem;
+    --text-hero: clamp(2.5rem, 6vw, 5rem);
+
+    /* ── Spacing ── */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+
+    /* ── Sizing ── */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 50%;
+
+    /* ── Shadows ── */
+    --glow-sm: 0 0 8px rgba(0, 204, 255, 0.3);
+    --glow-md: 0 0 20px rgba(0, 204, 255, 0.2);
+    --glow-lg: 0 0 40px rgba(0, 204, 255, 0.15);
+
+    /* ── Easing ── */
     --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --ease-awwwards: cubic-bezier(0.76, 0, 0.24, 1);
+
+    /* ── Z-Index Scale ── */
+    --z-background: 0;
+    --z-content: 1;
+    --z-overlay: 10;
+    --z-sticky: 100;
+    --z-fixed: 1000;
+    --z-modal: 2000;
+    --z-tooltip: 3000;
+    --z-grain: 9000;
+    --z-cursor: 9999;
+    --z-loader: 10000;
+
+    /* ── Transitions ── */
+    --transition-fast: 0.2s var(--ease-smooth);
+    --transition-base: 0.3s var(--ease-smooth);
+    --transition-slow: 0.5s var(--ease-premium);
   }
 
   html {
@@ -78,9 +129,9 @@
   }
 
   section {
-    min-height: 100vh;
+    min-height: auto;
     position: relative;
-    padding: 100px 5%;
+    padding: 60px 5%;
   }
 
 
@@ -101,7 +152,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 9998;
+      z-index: var(--z-grain);
       opacity: 0.04;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'
     stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
@@ -112,7 +163,7 @@
   /* ========== RESPONSIVE ========== */
   @media (max-width: 768px) {
     section {
-      padding: 80px 4%;
+      padding: 40px 4%;
     }
 
     body {
@@ -122,7 +173,7 @@
 
   @media (max-width: 480px) {
     section {
-      padding: 70px 3%;
+      padding: 30px 3%;
     }
   }
 
@@ -135,6 +186,34 @@
     height: 100%;
     z-index: 0;
     pointer-events: none;
+  }
+
+  /* ========== UTILITY CLASSES ========== */
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--star-blue), var(--nebula-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--star-blue);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: var(--space-md);
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-hero);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
 
   /* ========== ACCESSIBILITY ========== */
@@ -151,7 +230,7 @@
     position: fixed;
     top: -100px;
     left: 16px;
-    z-index: 10000;
+    z-index: var(--z-loader);
     padding: 12px 20px;
     background: var(--bg-primary);
     border: 1px solid var(--accent-cyan);

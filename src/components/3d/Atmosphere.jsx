@@ -35,8 +35,8 @@ const fragShader = `
     vec3 viewDir = normalize(-vPosition);
     float NdotV = max(dot(vNormal, viewDir), 0.0);
 
-    // Very steep fresnel — only visible at the extreme edge
-    float fresnel = pow(1.0 - NdotV, 6.0);
+    // Fresnel — visible atmospheric rim at the edge
+    float fresnel = pow(1.0 - NdotV, 3.5);
 
     // Sun-aware color
     float sunDot = dot(vWorldNormal, uSunDirection);

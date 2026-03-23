@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
+import TextReveal from '../ui/TextReveal'
+import useScrollReveal from '../../hooks/useScrollReveal'
 import '../../styles/projects.css'
 
 const projects = [
@@ -8,6 +10,8 @@ const projects = [
     title: 'DebugIt',
     subtitle: 'CI/CD Healing Agent',
     desc: 'An autonomous AI agent that clones repos, detects test failures, classifies bugs, generates fixes using Claude AI, and monitors CI/CD — iterating until all tests pass. Built with LangGraph state machine architecture.',
+    challenge: 'CI/CD failures waste hours of developer time. Manual debugging is slow and repetitive.',
+    result: 'Hackathon winner — autonomous agent fixes bugs in minutes, not hours.',
     tags: ['Python', 'FastAPI', 'LangGraph', 'Claude AI', 'React', 'WebSocket'],
     highlight: 'AI-Powered',
     highlightDesc: 'Hackathon winner — recruiter magnet showcasing AI engineering skills',
@@ -37,6 +41,8 @@ const projects = [
     title: 'OneDrive Clone',
     subtitle: 'Cloud Storage Platform',
     desc: 'Full-stack cloud storage app with file management, sharing, real-time collaboration, version control, comments, search, and admin dashboard. Deployed on Vercel with Supabase backend.',
+    challenge: 'Build a production-grade cloud storage platform from scratch with real-time collaboration.',
+    result: '560K+ lines of TypeScript — fully deployed, live users, admin dashboard.',
     tags: ['Next.js', 'TypeScript', 'Express', 'Supabase', 'Socket.io', 'Tailwind'],
     highlight: 'Full-Stack',
     highlightDesc: '560K+ lines of TypeScript — production-grade with live deployment',
@@ -60,6 +66,8 @@ const projects = [
     title: 'Go2 Locomotion',
     subtitle: 'Robot RL Training',
     desc: 'Reinforcement Learning training for Unitree Go2 quadruped robot using Genesis simulator. Teaches walking, running, jumping, spinning, and dancing using PPO algorithm with 4096 parallel environments.',
+    challenge: 'Train a real quadruped robot to walk, run, and dance using only reinforcement learning.',
+    result: '4096 parallel environments — robot learns complex locomotion in hours, not days.',
     tags: ['Python', 'PyTorch', 'RL/PPO', 'Genesis Sim', 'Robotics'],
     highlight: 'Robotics + RL',
     highlightDesc: 'Unique project — nobody else has a robot that learned to dance',
@@ -92,6 +100,8 @@ const projects = [
     title: 'SocialSphere',
     subtitle: 'Social Media Platform',
     desc: 'A fully interactive social media app built with pure vanilla JavaScript. Features posts, 6 reaction types, comments, follows, user profiles, hashtags, and localStorage persistence — no frameworks used.',
+    challenge: 'Build a full social media platform without React, Vue, or any framework — pure DOM manipulation.',
+    result: '143K lines of vanilla JavaScript — proves deep language mastery beyond frameworks.',
     tags: ['JavaScript', 'HTML5', 'CSS3', 'LocalStorage', 'DOM API'],
     highlight: 'Pure JS',
     highlightDesc: '143K lines of vanilla JavaScript — deep DOM mastery, zero frameworks',
@@ -183,6 +193,18 @@ function ProjectCard({ project, index }) {
           <span className="why-text">{project.highlightDesc}</span>
         </div>
         <p className="project-desc">{project.desc}</p>
+        {project.challenge && (
+          <div className="project-case-study">
+            <div className="case-item">
+              <span className="case-label">CHALLENGE</span>
+              <span className="case-text">{project.challenge}</span>
+            </div>
+            <div className="case-item">
+              <span className="case-label">RESULT</span>
+              <span className="case-text">{project.result}</span>
+            </div>
+          </div>
+        )}
         <div className="project-tags">
           {project.tags.map((tag) => (
             <span key={tag} className="tag">{tag}</span>
@@ -206,22 +228,37 @@ function ProjectCard({ project, index }) {
 }
 
 function Projects() {
+  const gridRef = useScrollReveal({
+    childSelector: '.project-card',
+    stagger: 0.15,
+    y: 50,
+  })
+
   return (
     <section id="projects" className="projects">
-      <motion.div
-        className="projects-header"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <p className="section-label">// PROJECTS</p>
+      <div className="projects-header">
+        <motion.p
+          className="section-label"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          // PROJECTS
+        </motion.p>
         <div className="about-line" style={{ margin: '0 auto 25px' }}></div>
-        <h2 className="section-title">FEATURED WORK</h2>
-        <p className="projects-subtitle">Real projects. Real code. Real impact.</p>
-      </motion.div>
+        <TextReveal text="FEATURED WORK" tag="h2" className="section-title" />
+        <motion.p
+          className="projects-subtitle"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+        >
+          Real projects. Real code. Real impact.
+        </motion.p>
+      </div>
 
-      <div className="projects-grid">
+      <div className="projects-grid" ref={gridRef}>
         {projects.map((project, index) => (
           <ProjectCard key={project.title} project={project} index={index} />
         ))}

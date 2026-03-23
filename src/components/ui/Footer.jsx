@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import profile from '../../data/profile'
 import '../../styles/footer.css'
 
@@ -7,11 +6,24 @@ export default function Footer() {
 
   return (
     <footer className="site-footer" role="contentinfo">
+      {/* Marquee CTA */}
+      <div className="marquee-wrapper">
+        <div className="marquee-track">
+          {[...Array(4)].map((_, i) => (
+            <a
+              key={i}
+              href={`mailto:${profile.email}`}
+              className="marquee-item hover-target"
+            >
+              Let's Work Together <span className="marquee-dash">&mdash;</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
       <div className="site-footer__inner">
-        {/* Divider */}
         <div className="site-footer__divider" />
 
-        {/* Content */}
         <div className="site-footer__content">
           <div className="site-footer__left">
             <span className="site-footer__logo">{profile.aka}</span>
@@ -21,22 +33,16 @@ export default function Footer() {
           </div>
 
           <div className="site-footer__right">
-            <motion.a
-              href="#about"
-              className="site-footer__back-top"
-              onClick={(e) => {
-                e.preventDefault()
-                window.scrollTo({ top: 0, behavior: 'smooth' })
-              }}
-              whileHover={{ y: -2 }}
+            <button
+              className="site-footer__back-top hover-target"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               aria-label="Back to top"
             >
-              ↑ Back to World
-            </motion.a>
+              &uarr; Back to World
+            </button>
           </div>
         </div>
 
-        {/* Ambient tagline */}
         <div className="site-footer__tagline">
           {profile.tagline}
         </div>

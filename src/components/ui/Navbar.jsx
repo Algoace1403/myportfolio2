@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
 import { navLinks } from '../../data/socials'
 import '../../styles/navbar.css'
 
@@ -7,11 +6,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
-  const location = useLocation()
-
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [location])
+  const [activeSection, setActiveSection] = useState('hero')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,10 +14,26 @@ export default function Navbar() {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight
       const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0
       setScrollProgress(progress)
+
+      // Determine active section based on scroll position
+      const sections = navLinks.map((l) => l.href.replace('#', ''))
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i])
+        if (el && el.getBoundingClientRect().top <= 150) {
+          setActiveSection(sections[i])
+          break
+        }
+      }
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const scrollTo = (href) => {
+    setMenuOpen(false)
+    const el = document.querySelector(href)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     <>
@@ -36,7 +47,14 @@ export default function Navbar() {
         aria-label="Page scroll progress"
       />
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} role="navigation" aria-label="Main navigation">
-        <Link to="/" className="nav-logo" aria-label="Home">AKS</Link>
+        <a
+          href="#hero"
+          className="nav-logo"
+          aria-label="Home"
+          onClick={(e) => { e.preventDefault(); scrollTo('#hero') }}
+        >
+          AKS
+        </a>
 
         <button
           className={`hamburger ${menuOpen ? 'open' : ''}`}
@@ -50,27 +68,17 @@ export default function Navbar() {
         </button>
 
         <ul className={`nav-links ${menuOpen ? 'nav-open' : ''}`} role="list">
-          {navLinks.map((link) => {
-            const isActive = location.pathname === link.path ||
-              (link.path.startsWith('/#') && location.pathname === '/')
-            return (
-              <li key={link.label} role="listitem">
-                <Link
-                  to={link.path.startsWith('/#') ? '/' : link.path}
-                  className={isActive ? 'active' : ''}
-                  onClick={() => {
-                    if (link.path.startsWith('/#')) {
-                      setTimeout(() => {
-                        document.querySelector(link.path.replace('/', ''))?.scrollIntoView({ behavior: 'smooth' })
-                      }, 100)
-                    }
-                  }}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            )
-          })}
+          {navLinks.map((link) => (
+            <li key={link.label} role="listitem">
+              <a
+                href={link.href}
+                className={activeSection === link.href.replace('#', '') ? 'active' : ''}
+                onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
     </>
