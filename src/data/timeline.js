@@ -101,13 +101,13 @@ const achievements = [
   {
     id: 'github-repos',
     label: 'GitHub Repos',
-    value: '10+',
+    value: '20+',
     icon: '◈',
   },
   {
     id: 'lines-of-code',
     label: 'Lines of Code',
-    value: '50K+',
+    value: '500K+',
     icon: '◎',
   },
   {
