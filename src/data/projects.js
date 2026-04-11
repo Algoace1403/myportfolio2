@@ -5,6 +5,32 @@
 
 const projects = [
   {
+    id: 'datacleaning-env',
+    name: 'DataCleaning RL Environment',
+    tagline: 'Training AI agents to clean real-world messy data — built for Meta.',
+    description: 'A reinforcement learning environment where AI agents learn to detect and fix data quality issues — duplicates, typos, missing values, schema violations — through interactive actions and multi-signal reward shaping. Built for the Meta PyTorch OpenEnv Hackathon, selected as a national finalist out of 52,000+ developers.',
+    role: 'Lead Developer & ML Engineer',
+    continent: 'ai-data',
+    status: 'live',
+    featured: true,
+    stack: ['Python', 'PyTorch', 'FastAPI', 'Docker', 'HuggingFace Spaces', 'OpenAI API', 'Hungarian Algorithm'],
+    features: [
+      '10 interactive data-cleaning actions — deduplicate, fill missing, fix typos, standardize formats, and more',
+      '3 progressive difficulty tiers (Easy → Medium → Hard) with increasingly messy datasets',
+      'Multi-signal reward system with fractional scoring, delta rewards, and penalty-aware grading',
+      'Hungarian algorithm-based row alignment for deterministic, reproducible evaluation',
+      'Deployed as a HuggingFace Space with full REST API for agent inference',
+    ],
+    impact: 'National Finalist — Meta PyTorch OpenEnv Hackathon 2026. Selected from 52,000+ developers to present directly to Meta engineers at the Grand Finale in Bangalore. 8,500+ lines of Python, 68+ tests, production-deployed on HuggingFace.',
+    lessons: 'Learned RL environment design from scratch, reward shaping for deterministic grading, building evaluation rubrics as code, and deploying ML environments to cloud infrastructure.',
+    links: {
+      github: 'https://github.com/Algoace1403/METAHackthon2026',
+      live: 'https://huggingface.co/spaces/Anuj424614/dataclean-env',
+    },
+    thumbnail: null,
+    images: [],
+  },
+  {
     id: 'onedrive-clone',
     name: 'OneDrive Clone',
     tagline: 'Production-grade cloud storage from scratch.',

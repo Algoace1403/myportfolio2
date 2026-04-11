@@ -64,6 +64,16 @@ const timeline = [
     color: '#ff6600',
   },
   {
+    id: 'meta-hackathon',
+    year: '2026',
+    title: 'Meta PyTorch OpenEnv — National Finalist',
+    subtitle: 'Top finalists out of 52,000+ developers',
+    description: 'Built a reinforcement learning environment for AI-driven data cleaning. Cleared Round 1 and advanced to the Grand Finale in Bangalore — presenting directly to Meta engineers, competing for prizes and direct interview opportunities at Meta and Hugging Face.',
+    type: 'milestone',
+    icon: '◈',
+    color: '#0668E1',
+  },
+  {
     id: 'portfolio-world',
     year: '2026',
     title: 'World Portfolio',
@@ -99,6 +109,12 @@ const achievements = [
     label: 'Lines of Code',
     value: '50K+',
     icon: '◎',
+  },
+  {
+    id: 'hackathon-finalist',
+    label: 'Meta Hackathon Finalist',
+    value: 'Top 0.1%',
+    icon: '◉',
   },
 ]
 

@@ -16,12 +16,12 @@ const profile = {
     'Full Stack Developer',
     '3D Web Engineer',
     'Creative Technologist',
-    'Future Founder',
-    'Problem Solver',
+    'Meta Hackathon Finalist',
+    'AI & Robotics Builder',
   ],
 
   // Hero tagline
-  tagline: 'Building the future, one pixel at a time.',
+  tagline: 'Building at the intersection of 3D, AI, and web — IIT Madras',
 
   // About — short and punchy
   bio: [

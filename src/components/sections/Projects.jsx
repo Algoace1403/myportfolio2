@@ -7,6 +7,39 @@ import '../../styles/projects.css'
 
 const projects = [
   {
+    title: 'DataCleaning RL Environment',
+    subtitle: 'Meta PyTorch OpenEnv — National Finalist',
+    desc: 'A reinforcement learning environment where AI agents learn to detect and fix real-world data quality issues — duplicates, typos, missing values, schema violations. Selected as a national finalist out of 52,000+ developers at the Meta PyTorch OpenEnv Hackathon.',
+    challenge: 'Design an RL environment with deterministic, reproducible grading that teaches AI agents the nuances of messy real-world data — not just toy problems.',
+    result: 'National Finalist — presenting directly to Meta engineers at the Grand Finale in Bangalore. 8,500+ lines, 68+ tests, deployed on HuggingFace.',
+    tags: ['Python', 'PyTorch', 'FastAPI', 'Docker', 'HuggingFace', 'OpenAI API'],
+    highlight: 'Meta Finalist',
+    highlightDesc: 'Top 0.1% — selected from 52,000+ developers to present at Meta Grand Finale',
+    github: 'https://github.com/Algoace1403/METAHackthon2026',
+    live: 'https://huggingface.co/spaces/Anuj424614/dataclean-env',
+    gradient: 'datacleaning',
+    icon: (
+      <svg className="project-svg" viewBox="0 0 120 120" fill="none">
+        <rect x="15" y="20" width="90" height="70" rx="6" stroke="#0668E1" strokeWidth="2" fill="rgba(6,104,225,0.05)" />
+        <rect x="25" y="30" width="55" height="4" rx="2" fill="#ff7b72" opacity="0.7" />
+        <rect x="25" y="38" width="40" height="4" rx="2" fill="#ff7b72" opacity="0.5" />
+        <rect x="25" y="46" width="60" height="4" rx="2" fill="#ffa657" opacity="0.6" />
+        <rect x="25" y="54" width="45" height="4" rx="2" fill="#4caf50" opacity="0.7" />
+        <rect x="25" y="62" width="55" height="4" rx="2" fill="#4caf50" opacity="0.8" />
+        <rect x="25" y="70" width="50" height="4" rx="2" fill="#4caf50" opacity="0.9" />
+        <path d="M85 35L90 40L95 30" stroke="#4caf50" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="90" cy="55" r="12" stroke="#0668E1" strokeWidth="2" fill="rgba(6,104,225,0.1)" />
+        <path d="M86 55L89 58L95 51" stroke="#0668E1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M30 95L45 85L60 90L75 80L90 85" stroke="#0668E1" strokeWidth="2" strokeLinecap="round" fill="none" />
+        <circle cx="30" cy="95" r="2.5" fill="#0668E1" />
+        <circle cx="45" cy="85" r="2.5" fill="#4caf50" />
+        <circle cx="60" cy="90" r="2.5" fill="#0668E1" />
+        <circle cx="75" cy="80" r="2.5" fill="#4caf50" />
+        <circle cx="90" cy="85" r="2.5" fill="#0668E1" />
+      </svg>
+    ),
+  },
+  {
     title: 'DebugIt',
     subtitle: 'CI/CD Healing Agent',
     desc: 'An autonomous AI agent that clones repos, detects test failures, classifies bugs, generates fixes using Claude AI, and monitors CI/CD — iterating until all tests pass. Built with LangGraph state machine architecture.',
